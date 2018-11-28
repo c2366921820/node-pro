@@ -1,0 +1,80 @@
+
+.table{
+.num{
+    height: 80px !important;
+    line-height: 80px !important;
+  }
+  td{
+    text-align: center;
+    height: 80px !important;
+    line-height: 80px !important;
+  }}
+  .body{
+    position: relative;
+    .add-box-hide{
+      display: none;
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border: 1px solid black;
+      top: 25px;
+      left: 150px;
+      background-color: #f9f9f9;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 25px;
+
+      .form-hide{
+        box-sizing: border-box;
+        #file{
+          width: 250px;
+          display: inline-block;
+        }
+        .submit{display: inline-block;
+          width: 120px;height: 35px;
+          line-height: 35px;
+          border-radius: 5px;
+          background-color: #337ab7;margin-right: 10px;
+          color: white;
+          opacity: 0.9;
+          text-decoration: none;
+          cursor: pointer;
+          &:hover{
+           opacity: 1;
+          }
+        }
+        .cancel{display: inline-block;
+          border-radius: 5px;
+          line-height: 35px;
+          width: 120px;height: 35px;
+          background-color: #cccccc;
+          opacity: 0.9;
+          color: white;
+          text-decoration: none;
+          cursor: pointer;
+          &:hover{
+            opacity: 1;
+          }
+        }
+      }
+      
+      h1{
+        font-size: 25px;
+        font-weight: 600;
+        margin-bottom: 30px;
+      }
+      label{
+        font-size: 25px;font-weight: 600;
+      }
+      #sel{
+        width: 179px;height: 27px;
+      }
+      .close{
+        width: 25px;height: 25px;position: absolute;top: 5px;right: 5px;
+        font-size:22px;font-weight: 600; 
+      }
+    }
+  }
+  .add{
+    cursor: default
+  }

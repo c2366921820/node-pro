@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>管理员登陆</title>
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/ace.min.css">
+    <link rel="stylesheet" href="/css/login.css">
+    
+</head>
+<body>
+        <div class="container">
+    <div id="login-box">
+            <div class="widget-main">
+                    <h4 class="header blue lighter bigger" style=" text-align:center; font-size: 27px;">
+                        天狗商城后台管理系统
+                    </h4>
+
+                    <div class="space-6"></div>
+
+                    <form class="form-vertical login-form" name="form" method="POST" action="/users/login">
+                        <fieldset>
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                <input type="text" class="form-control" placeholder="身份证号码/管理员账户" name="name" id="name" value="" required="required">
+                                    <i class="icon-user"></i>
+                                </span>
+                            </label>
+
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input type="password" class="form-control" placeholder="密码" name="pwd" id="pwd" required="required">
+                                    <i class="icon-lock"></i>
+                                </span>
+                            </label>
+
+                            <div class="space"></div>
+
+                            <div class="clearfix">
+            <!--					<input name="verify"  type="text" maxlength="5" placeholder="验证码" class="form-control" style="vertical-align:middle;width:90px;display:inline" required="required"/>
+                                <img id="verify" src="/index.php/Admin/verify" onclick="getVerify(this)" style="width:90px;height:33px;vertical-align:middle;cursor:pointer">-->
+                                <button type="submit" class="width-100 pull-right btn btn-sm btn-primary" id="login0">
+                                    <i class="icon-key"></i>
+                                    登录
+                                </button>
+                                <a id="notice" style="display:none;" href="https://www.baidu.com/s?wd=%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8&amp;rsv_spt=1&amp;rsv_iqid=0xad459873000d9d97&amp;issp=1&amp;f=8&amp;rsv_bp=0&amp;rsv_idx=2&amp;ie=utf-8&amp;tn=98012088_5_dg&amp;rsv_enter=1&amp;rsv_sug3=2&amp;rsv_n=2" target="_blank">系统检测您的浏览器可能存在兼容问题，建议下载【谷歌浏览器】</a>
+                            </div>
+
+                            <div class="space-4"></div>
+                        </fieldset>
+                    </form>
+<!--
+                    
+-->
+                </div><a href="register.html" class="register">没有账户？</a>
+    </div>
+        </div>
+</body>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- <script type="text/javascript">
+    $(function(){ 
+        $("#login0").click(function(){ 
+            var username = $("#name").val();
+            var password = $("#pwd").val();
+            var data = {"uname":username,"upwd":password};
+            $.ajax({ 
+                url:'users/login',
+                type:'post',
+                data: data,
+                success: function(data,status){ 
+                    if(status == 'success'){ 
+                        location.href = 'index.html';
+                    }
+                },
+                error: function(data,status){ 
+                    if(status == 'error'){ 
+                        location.href = 'login.html';
+                    }
+                }
+            });
+        });
+    });
+    </script> -->

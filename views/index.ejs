@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>天狗商城后台管理系统</title>
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+  <div class="container">
+
+    <%- include('./common/head') %>
+
+    <div class="lv-main">
+      <%- include('./common/menu') %>
+
+      <div class="body">
+        <div class="box">
+        <h2>welcome</h2>
+       <img src="/images/9798770e4e.jpg" alt="" style="width: 375px;height: 469px;margin-top: 18px;"></div>
+       <div class="tips">如果是管理员的话，显示（管理员）</div>
+      </div>
+
+    </div>
+
+    <%- include('./common/foot') %>
+  </div>
+</body>
 </html>
+<script src="/js/jquery.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/public.js"></script>
+<script>
+    var nick=getCookie("nickname");
+  console.log(nick);
+  $("#nickName").html(nick);
+  $("#exit").click(function(){
+    $("#nickName").html("");
+    deleteCookie("nickname");
+    setTimeout(function(){
+      alert("登陆过期请重新登陆");
+      window.location.assign("http://localhost:3000/login.html")
+    },1000)
+  })
+</script>
+<!-- <script>
+  $(".lv-menu li").click(
+    function(){
+      $(this).addClass("current1").siblings().removeClass("current1")
+    }
+  )
+</script> -->

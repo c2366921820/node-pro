@@ -1,0 +1,77 @@
+.table .num {
+  height: 80px !important;
+  line-height: 80px !important; }
+.table td {
+  text-align: center;
+  height: 80px !important;
+  line-height: 80px !important; }
+
+.body {
+  position: relative; }
+  .body .add-box-hide {
+    display: none;
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+    top: 25px;
+    left: 150px;
+    background-color: #f9f9f9;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 25px; }
+    .body .add-box-hide .form-hide {
+      box-sizing: border-box; }
+      .body .add-box-hide .form-hide #file {
+        width: 250px;
+        display: inline-block; }
+      .body .add-box-hide .form-hide .submit {
+        display: inline-block;
+        width: 120px;
+        height: 35px;
+        line-height: 35px;
+        border-radius: 5px;
+        background-color: #337ab7;
+        margin-right: 10px;
+        color: white;
+        opacity: 0.9;
+        text-decoration: none;
+        cursor: pointer; }
+        .body .add-box-hide .form-hide .submit:hover {
+          opacity: 1; }
+      .body .add-box-hide .form-hide .cancel {
+        display: inline-block;
+        border-radius: 5px;
+        line-height: 35px;
+        width: 120px;
+        height: 35px;
+        background-color: #cccccc;
+        opacity: 0.9;
+        color: white;
+        text-decoration: none;
+        cursor: pointer; }
+        .body .add-box-hide .form-hide .cancel:hover {
+          opacity: 1; }
+    .body .add-box-hide h1 {
+      font-size: 25px;
+      font-weight: 600;
+      margin-bottom: 30px; }
+    .body .add-box-hide label {
+      font-size: 25px;
+      font-weight: 600; }
+    .body .add-box-hide #sel {
+      width: 179px;
+      height: 27px; }
+    .body .add-box-hide .close {
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      font-size: 22px;
+      font-weight: 600; }
+
+.add {
+  cursor: default; }
+
+/*# sourceMappingURL=phone.css.map */

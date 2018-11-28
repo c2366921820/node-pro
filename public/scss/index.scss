@@ -1,0 +1,26 @@
+/* 首页的样式 */
+.body{
+    
+    position: relative;
+    overflow: auto;
+    h2{
+        font-size: 30px;
+        font-weight: 600;
+        margin-top: 20px
+    }
+    .tips{
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background-color: orange;
+        right: 30px;
+        top: 30px;
+        font-size: 16px;
+        text-align:justify;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        transform: translate3d(0,-2px,0);
+    }
+    .box{
+        width: 100%;height: 100%;text-align: center;
+    }
+}
