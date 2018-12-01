@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/lib/ace.min.css">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/canvas.css">
     
 </head>
 <body>
+    <script src="/js/canvas.js"></script>
         <div class="container">
-    <div id="login-box">
+    <div id="login-box" style="z-index: 99;opacity: 0.8;">
             <div class="widget-main">
                     <h4 class="header blue lighter bigger" style=" text-align:center; font-size: 27px;">
                         天狗商城后台管理系统
@@ -24,7 +26,7 @@
                         <fieldset>
                             <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                <input type="text" class="form-control" placeholder="身份证号码/管理员账户" name="name" id="name" value="" required="required">
+                                <input type="text" class="form-control" placeholder="请输入邮箱地址" name="name" id="name" value="" required="required">
                                     <i class="icon-user"></i>
                                 </span>
                             </label>
@@ -61,28 +63,3 @@
 </html>
 <script src="/js/jquery.min.js"></script>
 <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- <script type="text/javascript">
-    $(function(){ 
-        $("#login0").click(function(){ 
-            var username = $("#name").val();
-            var password = $("#pwd").val();
-            var data = {"uname":username,"upwd":password};
-            $.ajax({ 
-                url:'users/login',
-                type:'post',
-                data: data,
-                success: function(data,status){ 
-                    if(status == 'success'){ 
-                        location.href = 'index.html';
-                    }
-                },
-                error: function(data,status){ 
-                    if(status == 'error'){ 
-                        location.href = 'login.html';
-                    }
-                }
-            });
-        });
-    });
-    </script> -->

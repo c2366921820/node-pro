@@ -26,3 +26,13 @@ body{
   .register{
     color: #428bca
   }
+  .block{
+      position: relative;
+      .hide-info{font-size: 12px;
+          position: absolute;
+          left: 2px;
+          bottom: -15px;
+          color: red;
+          display: none;
+      }
+  }

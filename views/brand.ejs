@@ -25,18 +25,18 @@
               <div class="close">
                 x
               </div>
-              <form action="" class="form-hide">
+              <form action="/brand/addBrand" class="form-hide" id="form-hide" method="POST" enctype="multipart/form-data">
                 <label for="">品牌名称：</label>
-                <input type="text" placeholder="请输入手机名称""><br><br>
+                <input type="text" placeholder="请输入手机名称" name="brandName"><br><br>
                 <label for="">品牌等级：</label>
-                <select name="sel" id="sel">
-                <option value="苹果">1</option>
-                <option value="三星">2</option>
-                <option value="小米">3</option>
+                <select name="sel" id="sel" name="sel">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
                 </select><br><br><br><br>
                 <label for="">商品Logo：</label>
-               <input type="file" name="" id="file"><br><br><br><br><br><br>
-                <a class="submit">确认</a><a class="cancel">取消</a>
+               <input type="file" name="file" id="file"><br><br><br><br><br><br>
+                <a class="submit" onclick="document.getElementById('form-hide').submit()">确认</a><a class="cancel" onclick="document.getElementById('form-hide').reset()">重置</a>
     
                 
                 
@@ -54,32 +54,23 @@
                     <th>序号</th>
                     <th>品牌Logo</th>
                     <th>品牌名称</th>
+                    <th>品牌等级</th>
                     <th>操作</th>
                   </tr>
                 </thead>
               <tbody>
-                  <tr>
-                      <th scope="row" class="num">1</th>
-                      <td><img src="/images/1jia.jpg" alt="" class="img-responsive center-block img-rounded"></td>
-                      <td>一加手机</td>
-                      <td><a>修改</a>&nbsp;&nbsp;&nbsp;<a class="del">删除</a></td>
-                    </tr>
+                  <% for(var i = 0; i < list.length; i++) {%>
                     <tr>
-                        <th scope="row" class="num">2</th>
-                        <td><img src="/images/timg.jpg" alt="" class="img-responsive center-block img-rounded"></td>
-                        <td>小米科技</td>
-                        <td><a>修改</a>&nbsp;&nbsp;&nbsp;<a class="del">删除</a></td>
-                      </tr>
-                      <tr>
-                          <th scope="row" class="num">3</th>
-                          <td><img src="/images/samsung.jpg" alt="" class="img-responsive center-block img-rounded"></td>
-                          <td>三星电子</td>
-                          <td><a>修改</a>&nbsp;&nbsp;&nbsp;<a class="del">删除</a></td></tr>
-                          <tr>
-                              <th scope="row" class="num">3</th>
-                              <td><img src="/images/huawei.jpg" alt="" class="img-responsive center-block img-rounded"></td>
-                              <td>华为</td>
-                              <td><a>修改</a>&nbsp;&nbsp;&nbsp;<a class="del">删除</a></td></tr>
+                      <th scope="row" class="num"><%= prePage+i+1 %></th>
+                      <td><img src=<%= list[i].logo %> alt="" class="img-responsive center-block img-rounded"></td>
+                      <td><%= list[i].brandName %></td>
+                      <td><%= list[i].brandLevel %></td>
+                      <td>
+                          <a href="/brand/operate?id=<%= list[i]._id %>" class="operate">修改</a>&nbsp;&nbsp;
+                          <a class="del" href="/brand/delete?id=<%= list[i]._id %>">删除</a>      
+                      </td>
+                    </tr>
+                  <%}%>
                        
                             
               </tbody>
@@ -87,17 +78,16 @@
             <nav>
                 <ul class="pagination">
                   <li>
-                    <a href="#" aria-label="Previous">
+                    <a href="/brand?page=<%= currentPage - 1 < 1 ? 1: currentPage - 1 %>&pageSize=<%= pageSize %>" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
+                  <% for (var i = 0; i < totalPage; i++) {%>
+                    <li class="<%= currentPage === (i+1) ? 'active': '' %>"><a href="/brand?page=<%= i+1 %>&pageSize=<%= pageSize %>"><%= i + 1%></a></li>
+                  <%}%>
+      
                   <li>
-                    <a href="#" aria-label="Next">
+                    <a href="/brand?page=<%= currentPage + 1 > totalPage ? totalPage: currentPage + 1 %>&pageSize=<%= pageSize %>" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
@@ -114,26 +104,16 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/public.js"></script>
+<script src="/js/common.js"></script>
 <script>
   $("#add").on('click',
     function () {
-      $(".add-box-hide").css({display:"block"})
+      $(".add-box-hide").fadeIn();
       }
   )
   $(".close").on('click',
     function () {
-      $(".add-box-hide").css({display:"none"})
+      $(".add-box-hide").fadeOut();
       }
   )
-  var nick=getCookie("nickname");
-  console.log(nick);
-  $("#nickName").html(nick);
-  $("#exit").click(function(){
-    $("#nickName").html("");
-    deleteCookie("nickname");
-    setTimeout(function(){
-      alert("登陆过期请重新登陆");
-      window.location.assign("http://localhost:3000/login.html")
-    },1000)
-  })
 </script>

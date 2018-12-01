@@ -131,7 +131,7 @@ function getCookie(key){
 	for (var i = 0; i < cookieArr.length; i++) {
 		var arr = cookieArr[i].split("=");
 		if(arr[0] == key){
-			return arr[1];
+			return decodeURI(arr[1]);
 		}
 	}
 	return "";

@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
   var pageSize = parseInt(req.query.pageSize) || 5; // 每页显示的条数
   var totalSize = 0;  // 总条数
   var data = [];
+  var prePage= (page-1)*pageSize;
 
   MongoClient.connect(url, { useNewUrlParser: true}, function(err, client) {
     if (err) {
@@ -37,16 +38,6 @@ router.get('/', function(req, res, next) {
       },
 
       function(cb) {
-        // limit()
-        // skip()
-        // 1 - 0     page * pageSize - pageSize
-        // 2 - 5
-        // 3 - 10
-        // 4- 15
-        // db.collection('user').find().limit(5).skip(0)
-        // db.collection('user').find().limit(5).skip(5)
-        // db.collection('user').find().limit(5).skip(10)
-        // db.collection('user').find().limit(5).skip(15)
 
         db.collection('user').find().limit(pageSize).skip(page * pageSize - pageSize).toArray(function(err, data) {
           if (err) {
@@ -72,45 +63,12 @@ router.get('/', function(req, res, next) {
           // totalSize: totalSize,
           totalPage: totalPage,
           pageSize: pageSize,
-          currentPage: page
+          currentPage: page,
+          prePage:prePage
         })
       }
     })
   })
-
-
-
-  // MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
-  //   if (err) {
-  //     // 链接数据库失败
-  //     console.log('链接数据库失败', err);
-  //     res.render('error', {
-  //       message: '链接数据库失败',
-  //       error: err
-  //     });
-  //     return;
-  //   }
-  //   var db = client.db('project');
-
-  //   db.collection('user').find().toArray(function(err, data) {
-  //     if (err) {
-  //       console.log('查询用户数据失败', err);
-  //       // 有错误，渲染 error.ejs
-  //       res.render('error', {
-  //         message: '查询失败',
-  //         error: err
-  //       })
-  //     } else {
-  //       console.log(data);
-  //       res.render('users', {
-  //         list: data
-  //       });
-  //     }
-
-  //     // 记得关闭数据库的链接
-  //     client.close();
-  //   })
-  // });
 });
 
 
@@ -149,37 +107,6 @@ router.post('/login', function(req, res) {
 
     var db = client.db('product');
 
-    // db.collection('user').find({
-    //   username: username,
-    //   password: password
-    // }).count(function(err, num) {
-    //   if (err) {
-    //     console.log('查询失败', err);
-    //     res.render('error', {
-    //       message: '查询失败',
-    //       error: err
-    //     })
-    //   } else if (num > 0) {
-    //     // 登录成功 - 跳转到首页
-    //     // res.render('index');
-
-    //     // 注意，当前url地址是 location:3000/users/login。 如果直接使用 render() .页面地址是不会改变的。
-
-    //     // 登录成功，写入cookie
-    //     res.cookie('nickname', )
-
-
-    //     // res.redirect('http://localhost:3000/');
-    //     res.redirect('/');
-    //   } else {
-    //     // 登录失败
-    //     res.render('error', {
-    //       message: '登录失败',
-    //       error: new Error('登录失败')
-    //     })
-    //   }
-    //   client.close();
-    // })
 
     db.collection('user').find({
       username: username,
@@ -194,17 +121,25 @@ router.post('/login', function(req, res) {
       } else if (data.length <= 0) {
         // 没找到，登录失败
         res.render('error', {
-          message: '登录失败',
-          error: new Error('登录失败')
+          message: '登录失败,账户或密码错误',
+          error: new Error('登录失败，账户或密码错误')
         })
       } else {
         // 登录成功
 
         // cookie操作
         console.log(data[0].nickname)
+        console.log(data[0].username)
         res.cookie('nickname', data[0].nickname, {
-          maxAge: 60 * 60 * 1000
+          maxAge: 60 * 600 * 1000
         });
+        res.cookie('username', data[0].username, {
+          maxAge: 60 * 600 * 1000
+        });
+        res.cookie('isAdmin', data[0].isAdmin, {
+          maxAge: 60 * 600 * 1000
+        });
+
 
         res.redirect('/');
       }
@@ -282,38 +217,7 @@ router.post('/register', function(req, res) {
     })
   })
 
-  // MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
-  //   if (err) {
-  //     res.render('error', {
-  //       message: '链接失败',
-  //       error: err
-  //     })
-  //     return;
-  //   }
 
-  //   var db = client.db('project');
-  //   db.collection('user').insertOne({
-  //     username: name,
-  //     password: pwd,
-  //     nickname: nickname,
-  //     age: age,
-  //     sex: sex,
-  //     isAdmin: isAdmin
-  //   }, function(err) {
-  //     if (err) {
-  //       console.log('注册失败');
-  //       res.render('error', {
-  //         message: '注册失败',
-  //         error: err
-  //       })
-  //     } else {
-  //       // 注册成功 跳转到登陆页面
-  //       res.redirect('/login.html');
-  //     }
-
-  //     client.close();
-  //   })
-  // })
 });
 
 // 删除操作 localhost:3000/users/delete
@@ -339,11 +243,7 @@ router.get('/delete', function(req, res){
           error: err
         })
       } else {
-        // 删除成功，页面刷新一下
-        // res.reload  nodejs
-        // location.reload();
-        // res.redirect('/users');
-        // res.send('<script>location.reload();</script>');
+       
         res.redirect('/users');
       }
 
@@ -352,9 +252,48 @@ router.get('/delete', function(req, res){
   })
 })
 var Id=0;
+var pag=0;
+var pagSize=0;
 router.get('/operate', function(req, res, next) {
-  res.render('operate');
    Id = req.query.id;
+   pag = req.query.page;
+   pagSize = req.query.pageSize;
+   MongoClient.connect(url, { useNewUrlParser: true}, function(err, client) {
+    if (err) {
+      res.render('error', {
+        message: '链接失败',
+        error: err
+      })
+      return;
+    }
+
+    var db = client.db('product');
+
+    async.series([
+      function(cb) {
+        db.collection('user').find({"_id":ObjectId(Id)}).toArray(function(err, data) {
+          if (err) {
+            cb(err)
+          } else {
+            cb(null, data)
+          }
+        })
+
+      }
+    ], function(err, results) {
+      if (err) {
+        res.render('error', {
+          message: '错误',
+          error: err
+        })
+      } else {
+        console.log(results)
+        res.render('operate', {
+          list: results[0]
+        })
+      }
+    })
+  })
 });
 
 router.post('/operate', function(req, res) {
@@ -363,6 +302,7 @@ router.post('/operate', function(req, res) {
   var age = parseInt(req.body.age);
   var sex = req.body.sex;
   var phoneNumber=req.body.phoneNumber;
+  
 
 
   MongoClient.connect(url, {useNewUrlParser: true}, function(err, client) {
@@ -400,10 +340,79 @@ router.post('/operate', function(req, res) {
           error: err
         })
       } else {
-        res.redirect('/users');
+        var str= '/users?page='+pag+'&pageSize='+pagSize;
+        res.redirect(str);
       }
       // 不管成功or失败，
       client.close();
+    })
+  })
+});
+
+//搜索功能
+
+router.get('/search', function(req, res, next) {
+  var page = parseInt(req.query.page) || 1; // 页码
+  var pageSize = parseInt(req.query.pageSize) || 5; // 每页显示的条数
+  var totalSize = 0;  // 总条数
+  var data = [];
+  var prePage= (page-1)*pageSize;
+  var name=req.query.name;
+  var filter=new RegExp(name);
+
+  MongoClient.connect(url, { useNewUrlParser: true}, function(err, client) {
+    if (err) {
+      res.render('error', {
+        message: '链接失败',
+        error: err
+      })
+      return;
+    }
+
+    var db = client.db('product');
+
+    async.series([
+      function(cb) {
+        db.collection('user').find({nickname:filter}).count(function(err, num) {
+          if (err) {
+            cb(err);
+          } else {
+            totalSize = num;
+            cb(null);
+          }
+        })
+      },
+
+      function(cb) {
+
+        db.collection('user').find({nickname:filter}).limit(pageSize).skip(page * pageSize - pageSize).toArray(function(err, data) {
+          if (err) {
+            cb(err)
+          } else {
+            // data = data;
+            cb(null, data)
+          }
+        })
+
+      }
+    ], function(err, results) {
+      if (err) {
+        res.render('error', {
+          message: '错误',
+          error: err
+        })
+      } else {
+        var totalPage = Math.ceil(totalSize / pageSize); // 总页数
+
+        res.render('users', {
+          list: results[1],
+          // totalSize: totalSize,
+          totalPage: totalPage,
+          pageSize: pageSize,
+          currentPage: page,
+          prePage:prePage
+        })
+      }
     })
   })
 });

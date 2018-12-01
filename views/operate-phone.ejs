@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>修改资料</title>
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/ace.min.css">
+    <link rel="stylesheet" href="/css/login.css">
+    
+</head>
+<body style=" background: url(/images/bg.jpg);">
+        <div class="container">
+    <div id="login-box" style="height: 400px;">
+            <div class="widget-main">
+                    <h4 class="header blue lighter bigger" style=" text-align:center; font-size: 27px;">
+                        手机资料修改
+                    </h4>
+
+                    <div class="space-6"></div>
+
+                    <form class="form-vertical login-form" name="form" method="POST" action="/phone/operate" enctype="multipart/form-data">
+                        <fieldset>
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input type="text" class="form-control" placeholder="手机名称"" name="pname" id="pname" required="required" value=<%= list[0].phonename %>>
+                                    <i class="icon-lock"></i>
+                                </span>
+                            </label>
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input type="text" class="form-control" placeholder="品牌" name="brandName" id="brandName" required="required" value=<%= list[0].brand %>>
+                                    <i class="icon-lock"></i>
+                                </span>
+                            </label>
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input type="number" class="form-control" placeholder="官方指导价" name="price" id="price" required="required" value=<%= list[0].price %>>
+                                    <i class="icon-lock"></i>
+                                </span>
+                            </label>
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input type="number" class="form-control" placeholder="二手回收价"" name="price1" id="price1" required="required" value=<%= list[0].price1 %>>
+                                    <i class="icon-lock"></i>
+                                </span>
+                            </label>
+                            <input type="text" class="form-control" placeholder="二手回收价" style="display: none;" name="pic" value=<%= list[0].pic %>>
+                            <label for="file"><span style="font-weight: 600">上传图片:</span></label>&nbsp;&nbsp;<input type="file" name="file" id="file" style="display: inline-block">
+                            <input type="text" name="isChange" value="false" id="isChange" style="display: none">
+                           
+
+                            <div class="space"></div>
+
+                            <div class="clearfix">
+            <!--					<input name="verify"  type="text" maxlength="5" placeholder="验证码" class="form-control" style="vertical-align:middle;width:90px;display:inline" required="required"/>
+                                <img id="verify" src="/index.php/Admin/verify" onclick="getVerify(this)" style="width:90px;height:33px;vertical-align:middle;cursor:pointer">-->
+                                <button type="submit" class="width-100 pull-right btn btn-sm btn-primary" id="register1">
+                                    <i class="icon-key"></i>
+                                    确认修改
+                                </button>
+                                <a id="notice" style="display:none;" href="https://www.baidu.com/s?wd=%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8&amp;rsv_spt=1&amp;rsv_iqid=0xad459873000d9d97&amp;issp=1&amp;f=8&amp;rsv_bp=0&amp;rsv_idx=2&amp;ie=utf-8&amp;tn=98012088_5_dg&amp;rsv_enter=1&amp;rsv_sug3=2&amp;rsv_n=2" target="_blank">系统检测您的浏览器可能存在兼容问题，建议下载【谷歌浏览器】</a>
+                            </div>
+
+                            <div class="space-4"></div>
+                        </fieldset>
+                    </form>
+<!--
+                    
+-->
+<a href="users.html" class="register"></a>
+    </div>
+        </div>
+</body>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $("#file").change(
+        function(){
+            $("#isChange").val("true")
+        }
+    )
+</script>

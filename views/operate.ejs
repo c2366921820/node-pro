@@ -24,32 +24,34 @@
                         <fieldset>
                             <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                    <input type="password" class="form-control" placeholder="密码" name="pwd" id="pwd" required="required">
+                                    <input type="password" class="form-control" placeholder="密码" name="pwd" id="pwd" required="required" value=<%= list[0].password %>>
                                     <i class="icon-lock"></i>
                                 </span>
                             </label>
                             <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                    <input type="number" class="form-control" placeholder="请输入手机号" name="phoneNumber" id="phoneNumber" required="required">
+                                    <input type="number" class="form-control" placeholder="请输入手机号" name="phoneNumber" id="phoneNumber" required="required" value=<%= list[0].phoneNumber %>>
                                     <i class="icon-lock"></i>
                                 </span>
                             </label>
                             <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" class="form-control" placeholder="请输入昵称" name="nickname" id="nickname" required="required">
+                                    <input type="text" class="form-control" placeholder="请输入昵称" name="nickname" id="nickname" required="required" value=<%= list[0].nickname %>>
                                     <i class="icon-lock"></i>
                                 </span>
                             </label>
                             <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" class="form-control" placeholder="请输入年龄" name="age" id="age" required="required">
+                                    <input type="text" class="form-control" placeholder="请输入年龄" name="age" id="age" required="required" value=<%= list[0].age %> >
                                     <i class="icon-lock"></i>
                                 </span>
+                                <span style="display: none" id="uu"><%= list[0].username %></span>
+                                <span style="display: none" id="xx"><%= list[0].sex %></span>
                             </label>
                             <label style="float: left">
                                 <span>性别：</span>
-                                <input type="radio" name="sex" value="男" checked> 男
-                                <input type="radio" name="sex" value="女"> 女
+                                <input type="radio" name="sex" id="man" value="男"> 男
+                                <input type="radio" name="sex" id="woman" value="女"> 女
                               </label>
                            
 
@@ -76,33 +78,37 @@
         </div>
 </body>
 </html>
+<script src="/js/public.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    // $(function(){ 
-    //     $("#register1").click(function(){ 
-    //         var username = $("#name").val();
-    //         var password = $("#pwd").val();
-    //         var password1 = $("#pwd1").val();
-    //         if(password !== password1){ 
-    //             $("#pwd").css("border","1px solid red");
-    //             $("#pwd1").css("border","1px solid red");
-    //         }else if(password === password1){
-    //         var data = {"uname":username,"upwd":password};
-    //         $.ajax({ 
-    //             url: '/users/login',
-    //             type: 'post',
-    //             data: data,
-    //             success: function(data,status){ 
-    //                 if(status == 'success'){ 
-    //                     location.href = 'login.html';
-    //                 }
-    //             },
-    //             error: function(data,err){ 
-    //                     location.href = 'register.html';
-    //             }
-    //         }); 
-    //     }
-    //     });
-    // });
+<script src=/js/cookie.js></script>
+<script>
+    var user=getCookie("username");
+    var user_val=$("#uu").html();
+    var user_sex=$("#xx").html();
+    var nickname_val=$("#nickname").val();
+    if(user_sex=="男"){
+        $("#man").prop("checked",true)
+    }else if(user_sex=="女"){
+        $("#woman").prop("checked",true)
+    }
+
+    $("#nickname").keyup(function(){
+        nickname_val=$("#nickname").val();
+        console.log(nickname_val)
+    })
+    var c1=new GcookieApi();
+    
+    console.log(nickname_val)
+    $("#register1").click(
+        function(){
+            if(user==user_val){
+                deleteCookie("nickname")
+               c1.setCookie("nickname", nickname_val,"","","/")
+            }
+        }
+    )
+   
+    
+    
 </script>

@@ -10,9 +10,15 @@
     <link rel="stylesheet" href="/css/login.css">
     
 </head>
+<style>
+    .form-control1{
+        margin-top:10px; 
+    }
+</style>
+
 <body>
         <div class="container">
-    <div id="login-box" style="height: 400px;">
+    <div id="login-box" style="height: 420px;">
             <div class="widget-main">
                     <h4 class="header blue lighter bigger" style=" text-align:center; font-size: 27px;">
                         天狗商城后台管理系统
@@ -24,34 +30,39 @@
                         <fieldset>
                             <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                <input type="text" class="form-control" placeholder="身份证号码/管理员账户" name="name" value="" required="required">
+                                <input type="text" class="form-control " placeholder="请输入用户名" id="name" name="name" value="" required="required">
                                     <i class="icon-user"></i>
                                 </span>
+                                <span class="hide-info" id="name-err">用户名太短或含有非法字符</span>
                             </label>
 
                             <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                    <input type="password" class="form-control" placeholder="密码" name="pwd" id="pwd" required="required">
+                                    <input type="password" class="form-control form-control1" placeholder="密码" name="pwd" id="pwd" required="required">
                                     <i class="icon-lock"></i>
                                 </span>
+                                <span class="hide-info" id="pwd-err">密码由6-18位的数字、字母、下划线组成</span>
                             </label>
                             <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                    <input type="number" class="form-control" placeholder="请输入手机号" name="phoneNumber" id="phoneNumber" required="required">
+                                    <input type="number" class="form-control form-control1" placeholder="请输入手机号" name="phoneNumber" id="phoneNumber" required="required">
                                     <i class="icon-lock"></i>
                                 </span>
+                                <span class="hide-info" id="phone-err">手机号码格式不正确</span>
                             </label>
                             <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" class="form-control" placeholder="请输入昵称" name="nickname" id="nickname" required="required">
+                                    <input type="text" class="form-control form-control1" placeholder="请输入昵称" name="nickname" id="nickname" required="required">
                                     <i class="icon-lock"></i>
                                 </span>
+                                <span class="hide-info" id="nickname-err">昵称或含有非法字符</span>
                             </label>
                             <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" class="form-control" placeholder="请输入年龄" name="age" id="age" required="required">
+                                    <input type="number" class="form-control form-control1" placeholder="请输入年龄" name="age" id="age" required="required">
                                     <i class="icon-lock"></i>
                                 </span>
+                               
                             </label>
                             <label style="float: left">
                                 <span>性别：</span>
@@ -90,31 +101,4 @@
 </html>
 <script src="/js/jquery.min.js"></script>
 <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    // $(function(){ 
-    //     $("#register1").click(function(){ 
-    //         var username = $("#name").val();
-    //         var password = $("#pwd").val();
-    //         var password1 = $("#pwd1").val();
-    //         if(password !== password1){ 
-    //             $("#pwd").css("border","1px solid red");
-    //             $("#pwd1").css("border","1px solid red");
-    //         }else if(password === password1){
-    //         var data = {"uname":username,"upwd":password};
-    //         $.ajax({ 
-    //             url: '/users/login',
-    //             type: 'post',
-    //             data: data,
-    //             success: function(data,status){ 
-    //                 if(status == 'success'){ 
-    //                     location.href = 'login.html';
-    //                 }
-    //             },
-    //             error: function(data,err){ 
-    //                     location.href = 'register.html';
-    //             }
-    //         }); 
-    //     }
-    //     });
-    // });
-</script>
+<script src="/js/register.js"></script>

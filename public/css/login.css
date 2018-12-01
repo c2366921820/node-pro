@@ -29,4 +29,16 @@ body #login-box {
   color: #428bca;
 }
 
+.block {
+  position: relative;
+}
+.block .hide-info {
+  font-size: 12px;
+  position: absolute;
+  left: 2px;
+  bottom: -15px;
+  color: red;
+  display: none;
+}
+
 /*# sourceMappingURL=login.css.map */

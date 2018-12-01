@@ -21,8 +21,8 @@
       <%- include('./common/menu') %>
 
       <div class="body">
-        <form class="form-inline search-bar">
-          <input type="text" class="form-control">
+        <form class="form-inline search-bar" action="/users/search" method="GET">
+          <input type="text" class="form-control" name="name">
           <button class="btn btn-primary">搜索</button>
         </form>
 
@@ -41,28 +41,41 @@
           </thead>
           <tbody>
             <% for(var i = 0; i < list.length; i++) {%>
-              <tr>
-                <th scope="row"><%= i+1 %></th>
-                <td><%= list[i].username %></td>
-                <td><%= list[i].nickname %></td>
-                <td><%= list[i].phoneNumber %></td>
-                <td><%= list[i].age %></td>
-                <td><%= list[i].sex %></td>
-                <td><% if(list[i].isAdmin) {%>
-                  <span>是</span>
-                <%} else{%> <span>否</span>
-              <%}%>
+            <tr>
+              <th scope="row">
+                <%=prePage+i+1 %>
+              </th>
+              <td class="tname">
+                <%= list[i].username %>
               </td>
-                <td>
-                  <% if(list[i].isAdmin) {%>
-                    <a href="/users/operate?id=<%= list[i]._id %>">操作</a>
-                  <%} 
-                  else{%> <a href="/users/operate?id=<%= list[i]._id %>">操作</a>
-                    <a class="del" href="/users/delete?id=<%= list[i]._id %>">删除</a>
-                  <%}%>
+              <td>
+                <%= list[i].nickname %>
+              </td>
+              <td>
+                <%= list[i].phoneNumber %>
+              </td>
+              <td>
+                <%= list[i].age %>
+              </td>
+              <td>
+                <%= list[i].sex %>
+              </td>
+              <td>
+                <% if(list[i].isAdmin) {%>
+                <span>是</span>
+                <%} else{%> <span>否</span>
+                <%}%>
+              </td>
+              <td>
+                <% if(list[i].isAdmin) {%>
+                <a class="admin" href="/users/operate?id=<%= list[i]._id %>&page=<%= currentPage %>&pageSize=<%= pageSize %>">修改</a>
+                <%} 
+                  else{%> <a href="/users/operate?id=<%= list[i]._id %>&page=<%= currentPage %>&pageSize=<%= pageSize %>">修改</a>
+                <a class="del" href="/users/delete?id=<%= list[i]._id %>">删除</a>
+                <%}%>
 
-                </td>
-              </tr>
+              </td>
+            </tr>
             <%}%>
 
           </tbody>
@@ -76,11 +89,13 @@
               </a>
             </li>
             <% for (var i = 0; i < totalPage; i++) {%>
-              <li class="<%= currentPage === (i+1) ? 'active': '' %>"><a href="/users?page=<%= i+1 %>&pageSize=<%= pageSize %>"><%= i + 1%></a></li>
+            <li class="<%= currentPage === (i+1) ? 'active': '' %>"><a href="/users?page=<%= i+1 %>&pageSize=<%= pageSize %>">
+                <%= i + 1%></a></li>
             <%}%>
 
             <li>
-              <a href="/users?page=<%= currentPage + 1 > totalPage ? totalPage: currentPage + 1 %>&pageSize=<%= pageSize %>" aria-label="Next">
+              <a href="/users?page=<%= currentPage + 1 > totalPage ? totalPage: currentPage + 1 %>&pageSize=<%= pageSize %>"
+                aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
@@ -98,16 +113,18 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/public.js"></script>
+<script src="/js/common.js"></script>
 <script>
-  var nick=getCookie("nickname");
-  console.log(nick);
-  $("#nickName").html(nick);
-  $("#exit").click(function(){
-    $("#nickName").html("");
-    deleteCookie("nickname");
-    setTimeout(function(){
-      alert("登陆过期请重新登陆");
-      window.location.assign("http://localhost:3000/login.html")
-    },1000)
-  })
+  //管理员无法操作其他管理员
+  $(".admin").click(
+    function(){
+     var tname=$(this).parents().siblings(".tname").html();
+     var cookieUsername=getCookie("username");
+     console.log(cookieUsername)
+     if($.trim(tname)!=cookieUsername){
+       alert("大兄弟，无法操作其他管理员哦！")
+       return false
+     }
+    }
+  )
 </script>
